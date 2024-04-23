@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+    <div id="content">
+    </div>
+    <div><canvas id="canvas1" width="75" height="25"></canvas> <button id="downloadBTN1">Download</button></div>
+
+    <script>
+        window.onload = (e) => {
+            document.getElementById("downloadBTN1").addEventListener("click", () => {
+                onClick('canvas1');
+            })
+        }
+        function onClick(canvas) {
+            var link = document.createElement("a");
+            link.download = "download.png";
+            link.href = document.getElementById(canvas).toDataURL();
+            link.click();
+              }
+
+        var table_data = `{% for data in page_data %}{{ data|safe }}\n{% endfor %}`;
+        document.getElementById('content').innerHTML = table_data
+        var canvas = document.getElementById('canvas1');
+        var myChart = new Chart(canvas, {
+    type: 'doughnut',
+    data: {
+        labels: [{% for x in key %}`{{x}}`,{%endfor%}],
+        datasets: [{
+            label: '# of Votes',
+            data: [{% for x in val %}{{x}},{%endfor%}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+    </script>
+</body>
+</html>
