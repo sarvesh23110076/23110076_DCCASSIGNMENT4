@@ -7,3 +7,5 @@
 #3]Import the databases named "dccassign_data1" and "dccassign_data2" in MySql Workbench.
 #4]Open the folder in VScode .
 #5] Run the "app.py" file . Change the password of the MySql Server in the "app.py" file
+
+#link for screenshots:https://github.com/sarvesh23110076/23110076_DCCASSIGNMENT4/commit/eec5462e7d54fd110e48e9c4375c3fd35d12bad2
